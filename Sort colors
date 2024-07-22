@@ -1,0 +1,28 @@
+leetcode - https://leetcode.com/problems/sort-colors/description/
+
+brute force - use any sorting algorithm like bubble , insiertion or selection sort
+optimal approach - count number of '0', '1', and '2' and change array according to it
+optimal approach - use binary sort and modify it by using three pointer making low=0, hihg=size-1 and mid=0 then running loop till mid<=high
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int low=0, high = nums.size()-1, mid = 0;
+
+        while(mid <= high){
+            // int mid = (low+high)/2 ;
+
+            if(nums[mid] == 0){
+                swap(nums[low], nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid] == 1){
+                mid++;
+            }
+            else{
+                swap(nums[mid], nums[high]);
+                high--;
+            }
+        }
+    }
+};
