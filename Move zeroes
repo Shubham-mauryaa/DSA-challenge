@@ -1,0 +1,16 @@
+leetcode - https://leetcode.com/problems/move-zeroes/description/
+solution-
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int zi=0, nzi=0;
+
+        while(nzi < nums.size()){
+            if(nums[nzi] != 0){
+                swap(nums[nzi], nums[zi]);
+                zi++;
+            }
+            nzi++;
+        }
+    }
+};
