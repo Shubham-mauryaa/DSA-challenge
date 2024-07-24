@@ -1,0 +1,37 @@
+link - https://leetcode.com/problems/valid-palindrome-ii/description/
+solution - 
+class Solution {
+public:
+    
+    bool check_palindrome(string s){
+        int start = 0, end = s.size()-1;
+        bool flag = true;
+
+        while(start<=end){
+            if(s[start] != s[end]){
+                flag = false;
+                break;
+            }
+            start++, end--;
+        }
+
+        return flag;
+    }
+
+    bool validPalindrome(string s) {
+        if(check_palindrome(s))return true;
+
+        int i=0, j=s.size()-1;
+
+        while(i<=j){
+            if(s[i] == s[j]){
+                i++, j-- ;
+            }
+            else{
+                return check_palindrome(s.substr(0,i)+s.substr(i+1)) || check_palindrome(s.substr(0,j)+s.substr(j+1)) ;
+            }
+        }
+
+        return false;
+    }
+};
