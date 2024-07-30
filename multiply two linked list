@@ -1,0 +1,22 @@
+link - https://www.geeksforgeeks.org/problems/multiply-two-linked-lists/1
+solution - 
+class solution {
+  public:
+    long long multiplyTwoLists(Node *first, Node *second) {
+        long long int num1=0, num2=0, ans, mod = 1000000007;
+        
+        while(first){
+            num1 = ( num1*10 + first->data )%mod ;
+            first = first->next;
+        }
+        
+        while(second){
+            num2 = ( num2*10 + second->data )%mod ;
+            second = second->next;
+        }
+        
+        ans = (num1*num2)%mod ;
+        
+        return ans;
+    }
+};
