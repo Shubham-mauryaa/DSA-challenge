@@ -1,0 +1,43 @@
+link - https://www.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1
+solution - 
+class Solution
+{
+    public:
+    Node* reverse(Node *head){
+        Node* pre=NULL ;
+        
+        while(head){
+            Node* t = head;
+            head = head->next;
+            t->next = pre;
+            pre = t;
+        }
+        
+        return pre;
+    }
+    Node *compute(Node *head)
+    {
+        head = reverse(head);
+        
+        int max = head->data ;
+        
+        Node* pre=head, *cur=head->next;
+        
+        while(cur){
+            if(cur->data >= max){
+                max = cur->data;
+                pre = cur;
+            }
+            else{
+                pre->next = cur->next;
+            }
+            cur = cur->next;
+        }
+        
+        head = reverse(head);
+        
+        return head;
+    }
+    
+};
+   
