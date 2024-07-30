@@ -1,0 +1,17 @@
+link - https://leetcode.com/problems/reverse-linked-list/description/
+solution - 
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* pre=NULL, *cur=head;
+
+        while(cur){
+            ListNode *t = cur;
+            cur = cur->next;
+            t->next = pre;
+            pre = t;
+        }
+
+        return pre;
+    }
+};
