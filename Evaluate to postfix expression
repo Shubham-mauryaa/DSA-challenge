@@ -1,0 +1,33 @@
+link -https://www.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1
+sol-
+class Solution
+{
+    public:
+    //Function to evaluate a postfix expression.
+    int evaluatePostfix(string tokens)
+    {
+        stack<int> st;
+        unordered_set<char> operators({'+','-','*','/'});
+
+        int res=0;
+        for(auto t : tokens){
+            if(!st.empty() && operators.find(t)!=operators.end() ){
+                int op1 = st.top();
+                st.pop();
+                int op2 = st.top();
+                st.pop();
+
+                if(t == '+')res = op1+op2;
+                if(t == '-')res = op2-op1;
+                if(t == '*')res = op1*op2;
+                if(t == '/')res = op2/op1;
+                st.push(res);
+            }
+            else{
+                int num = t-'0';
+                st.push(num);
+            }
+        }
+        return st.top();
+    }
+};
