@@ -1,0 +1,48 @@
+link - https://leetcode.com/problems/counting-bits/description/
+
+sol1 - 
+  class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+
+        for(int i=0; i<=n; i++){
+            ans[i] = ans[i/2] + i%2 ;
+        }
+
+        return ans;
+    }
+};
+
+sol2 -
+  class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+
+        for(int i=0; i<=n; i++){
+            int cnt = 0;
+            for(int j=0; j<32; j++){
+                int bit = (i>>j)&1;
+                if(bit == 1)cnt++;
+            }
+            ans[i]=cnt;
+        }
+
+        return ans;
+    }
+};
+
+sol3- 
+  class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+
+        for(int i=0; i<=n; i++){
+            ans[i] = __builtin_popcount(i);
+        }
+
+        return ans;
+    }
+};
