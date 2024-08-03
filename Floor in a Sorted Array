@@ -1,0 +1,20 @@
+link - https://www.geeksforgeeks.org/problems/floor-in-a-sorted-array-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+sol- 
+class Solution {
+  public:
+    // Function to find floor of x
+    // n: size of vector
+    // x: element whose floor is to find
+    int findFloor(vector<long long> &v, long long n, long long x) {
+
+        int indx = -1;
+        
+        for(int i=n-1; i>=0; i--){
+            if(v[i] <= x){
+                indx = i;
+                break;
+            }
+        }
+        return indx;
+    }
+};
