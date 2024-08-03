@@ -1,0 +1,91 @@
+link - https://leetcode.com/problems/invert-binary-tree/description/
+solution 1 using bfs- 
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root == NULL )return root;
+
+        queue<TreeNode*> q;
+        q.push(root);
+        vector<int>v;
+        TreeNode* node = root;
+
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+
+            if(it->right){
+                q.push(it->right);
+                v.push_back(it->right->val);
+            }
+            else{
+                v.push_back(INT_MAX);
+            }
+
+            if(it->left){
+                q.push(it->left);
+                v.push_back(it->left->val);
+            }
+            else{
+                v.push_back(INT_MAX);
+            }
+        }
+
+        TreeNode* newroot = new TreeNode(root->val);
+        int indx = 0;
+        q.push(newroot);
+
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+
+            if(v[indx] != INT_MAX){
+                it->left = new TreeNode(v[indx]);
+                q.push(it->left);
+            }
+            else{
+                it->left = NULL;
+            }
+            indx++;
+
+            if(v[indx] != INT_MAX){
+                it->right = new TreeNode(v[indx]);
+                q.push(it->right);
+            }
+            else{
+                it->right = NULL;
+            }
+            indx++;
+        }
+
+        return newroot;
+
+    }
+};
+
+
+solution2- 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root == NULL)return root;
+
+        TreeNode* newnode = root->left;
+        root->left = invertTree(root->right);
+        root->right = invertTree(newnode);
+
+        return root;
+    }
+};
