@@ -1,0 +1,31 @@
+link - https://leetcode.com/problems/subtree-of-another-tree/description/
+code - 
+class Solution {
+public:
+    bool sametree(TreeNode* node1, TreeNode* node2) {
+        if (node1 == NULL && node2 == NULL)
+            return true; // if both are null they are same trees
+
+        // if they both are not null compare them
+        if ( node1 !=NULL && node2 != NULL && node1->val == node2->val)
+            return sametree(node1->left, node2->left) &&
+                   sametree(node1->right, node2->right);
+
+        return false; // now it only means one tree is null and another is not
+                      // so return false;
+    }
+
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(subRoot == NULL) // if subroot is null then root is null or not they are same tree    
+            return true;
+        
+        if(root == NULL)
+            return false; // after above if its sure subroot is not null and then if root is null can't be same tree
+
+        if (sametree(root, subRoot)) //if they are same tree return true
+            return true;
+
+        return (isSubtree(root->left, subRoot) ||
+               isSubtree(root->right, subRoot));
+    }
+};
