@@ -1,0 +1,24 @@
+link - https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
+solution - 
+class Solution {
+    TreeNode* prevsmall = nullptr;
+public:
+    void inorder(TreeNode* root, int& ans){
+        if(!root)return ;
+
+        inorder(root->left, ans);
+
+        if(prevsmall != NULL){
+            ans = min( ans, root->val-prevsmall->val );
+        }
+        prevsmall = root;
+
+        inorder(root->right, ans);
+    }
+    int getMinimumDifference(TreeNode* root) {
+        int ans = INT_MAX;
+        inorder(root, ans);
+
+        return ans;
+    }
+};
