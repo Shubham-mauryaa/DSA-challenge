@@ -1,0 +1,22 @@
+link - https://leetcode.com/problems/path-sum/description/
+code - 
+class Solution {
+public:
+    bool helper(TreeNode* root, int ts, int cs){
+        if(!root)return false;
+
+        cs += root->val;
+        if(!root->left && !root->right){
+            if(ts==cs)return true;
+            else return false;
+        }
+
+        bool l = root->left && helper(root->left, ts, cs);
+        bool r = root->right && helper(root->right, ts, cs) ;        
+
+        return l||r ;
+    }
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        return helper(root, targetSum, 0);
+    }
+};
