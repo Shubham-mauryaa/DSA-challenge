@@ -1,0 +1,20 @@
+link - https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/
+code - 
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int lsum=0, rsum=0, ans=0, n=cardPoints.size();
+        for(int i=0; i<k; i++){
+            lsum += cardPoints[i];
+        }
+        ans = lsum;
+
+        for(int i=0; i<k; i++){
+            lsum -= cardPoints[k-1-i];
+            rsum += cardPoints[n-1-i];
+
+            ans = max(ans, lsum+rsum);
+        }
+        return ans;
+    }
+};
