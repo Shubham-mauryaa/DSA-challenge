@@ -1,0 +1,52 @@
+link - https://leetcode.com/problems/jump-game/description/
+code - 
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        vector<bool> dp(n, false);
+        dp[n-1] = true;
+
+        int i = n-2, ti=n-1;
+        ti  = least index where you can jump
+
+        while(i >= 0){
+            if(i<n-1 && nums[i]==0){
+                i--;
+                continue;
+            }
+
+            if( (nums[i]+i) >= ti ){
+                dp[i] = true;
+                ti = i;
+            }
+            else if(dp[i+1]){
+                dp[i] = true;
+                ti = i;
+            }
+            i--;
+        }
+
+        return dp[0];
+        // return ti == 0;
+    }
+};
+
+coce 2-
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        int i = n-2, ti=n-1;
+        // ti  = least index where you can jump
+
+        while(i >= 0){
+            if( (nums[i]+i) >= ti ){
+                ti = i;
+            }
+            i--;
+        }
+
+        return ti == 0;
+    }
+};
