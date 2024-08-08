@@ -1,0 +1,41 @@
+link - https://leetcode.com/problems/game-of-life/description/
+code - 
+class Solution {
+    int rowsize, colsize;
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+        rowsize = board.size(), colsize = board[0].size();
+        vector<pair<int,int>> dir = {{-1,0}, {1,0}, {0,-1}, {0,1}, {-1,-1}, {-1,1}, {1,-1}, {1,1}};
+        vector<pair<int, pair<int,int>>> store; //storing indexes to be changed and the value to be change
+
+        for(int i=0; i<rowsize; i++){
+            for(int j=0; j<colsize; j++){
+                int cnt_one=0;
+
+                for(int k=0; k<8; k++){
+                    int row = i + dir[k].first;
+                    int col = j + dir[k].second;
+                    if(row<0 || col<0 || row>=rowsize || col>=colsize)continue;
+
+                    if(board[row][col] == 1)cnt_one++;
+                }
+
+                if(board[i][j] == 1){
+                    if(cnt_one < 2 || cnt_one > 3){
+                        store.push_back( {0, {i, j}} );
+                    }
+                }
+                else{
+                    if(cnt_one == 3){
+                        store.push_back( {1, {i, j}} );
+                    }
+                }
+            }
+        }
+
+        for(auto st : store){
+            int row = st.second.first, col = st.second.second, val = st.first;
+            board[row][col] = val;
+        }
+    }
+};
