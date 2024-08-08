@@ -1,0 +1,39 @@
+link - https://www.geeksforgeeks.org/problems/all-unique-permutations-of-an-array/0 
+code - 
+class Solution {
+  public:
+    void helper(vector<int>& arr, int n, vector<bool>& vis, set<vector<int>>& ans, vector<int>& temp){
+        if(temp.size() == n){
+            ans.insert(temp);
+            return ;
+        }
+        
+        for(int i=0; i<n; i++){
+            if(!vis[i]){
+                vis[i] = true;
+                temp.push_back(arr[i]);
+                
+                helper(arr, n, vis, ans, temp);
+                
+                vis[i] = false;
+                temp.pop_back();
+            }
+        }
+        
+    }
+    vector<vector<int>> uniquePerms(vector<int> &arr ,int n) {
+        // code here
+        vector<bool>vis(n , false);
+        set<vector<int>>permn;
+        vector<int>temp;
+        
+        helper(arr, n, vis, permn, temp);
+        
+        vector<vector<int>>ans;
+        for(auto v : permn){
+            ans.push_back(v);
+        }
+        
+        return ans;
+    }
+};
