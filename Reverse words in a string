@@ -1,0 +1,59 @@
+link - https://leetcode.com/problems/reverse-words-in-a-string/description/
+code - 
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans="", temp="";
+        int i = 0;
+
+        while(i < s.length()){
+            if(s[i] != ' ')temp += s[i];
+
+            if(s[i]==' ' && temp!= ""){
+                if(ans == "")ans = temp;
+                else ans = temp + " " + ans;
+                temp = "";
+            }
+            i++;
+        }
+
+        if(temp != ""){
+            if(ans == "")ans = temp;
+            else ans = temp + " " + ans;
+        }
+
+        return ans;
+    }
+};
+
+code2 - 
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack<string> st;
+        string str = "";
+        s+=' ';
+        for(int i=0; i < s.length(); i++){
+            if(s[i] == ' '){
+                st.push(str);
+                str="";
+            }
+            else str += s[i];
+        }
+
+        string ans="";
+
+        while(!st.empty()){
+            if(st.top() == ""){
+                st.pop();
+                continue;
+            }
+            ans += st.top();
+            ans += ' ';
+            st.pop();
+        }
+        ans.pop_back();
+
+        return ans;
+    }
+};
