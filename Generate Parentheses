@@ -1,0 +1,22 @@
+link - https://leetcode.com/problems/generate-parentheses/description/
+code - 
+class Solution {
+public:
+    void create_parentheses(vector<string>& ans, string st, int open, int close, int total){
+        if(open>total || close>open)return;
+        if(open == total && close == total){
+            ans.push_back(st);
+        }
+
+        create_parentheses(ans, st+"(", open+1, close, total);
+        create_parentheses(ans, st+")", open, close+1, total);
+    }
+    vector<string> generateParenthesis(int n) {
+        int open = 1, close=0;
+        string st="(";
+        vector<string> ans;
+
+        create_parentheses(ans, st, open, close, n);
+        return ans;
+    }
+};
