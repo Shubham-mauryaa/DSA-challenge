@@ -1,0 +1,34 @@
+link - https://leetcode.com/problems/integer-to-roman/description/
+code - 
+class Solution {
+public:
+    string intToRoman(int num) {
+        string roman[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int intval[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+
+        int i = 0;
+        string ans = "";
+        while(num > 0){
+            if(num >= intval[i]){
+                ans += roman[i];
+                num -= intval[i];
+            }
+            else i++;
+        }
+        return ans;
+    }
+};
+
+code 2 - 
+class Solution {
+public:
+    string intToRoman(int num) {
+        string ones[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+        string tens[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        string hnds[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        string thds[] = {"", "M", "MM", "MMM"};
+
+        string roman = thds[num/1000] + hnds[(num%1000)/100] + tens[(num%100)/10] + ones[num%10];
+        return roman;
+    }
+};
