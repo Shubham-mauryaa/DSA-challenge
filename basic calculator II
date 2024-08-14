@@ -1,0 +1,46 @@
+link - https://leetcode.com/problems/basic-calculator-ii/description/
+code - 
+class Solution {
+public:
+    int calculate(string s) {
+        s += '+';// so that we can execute the last operator in string 
+        char sign = '+';
+
+        long long int cur_val = 0;
+        stack<int> st;
+
+        for(int i=0; i<s.length(); i++){
+            if(s[i] == ' ')continue;
+            
+            if(isdigit(s[i]))cur_val = cur_val*10 + (s[i]-'0');
+            else{
+                if(sign == '+'){
+                    st.push(cur_val);
+                }
+                else if(sign == '-'){
+                    st.push(-1*cur_val);
+                }
+                else if(sign == '*'){
+                    int num = st.top();
+                    st.pop();
+                    st.push(num * cur_val);
+                }
+                else if(sign == '/'){
+                    int num = st.top();
+                    st.pop();
+                    st.push(num / cur_val);
+                }
+                cur_val = 0;
+                sign = s[i];
+            }
+        }
+
+        long long int ans = 0;
+        while(!st.empty()){
+            ans += st.top();
+            st.pop();
+        }
+
+        return ans;
+    }
+};
