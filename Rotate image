@@ -1,0 +1,23 @@
+link - https://leetcode.com/problems/rotate-image/description/
+code- 
+class Solution {
+public:
+    void rev(vector<int>& v) {
+        int n = v.size();
+        for (int i = 0; i < n / 2; i++) {
+            swap(v[i], v[n - i - 1]);
+        }
+    }
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            rev(matrix[i]);
+        }
+    }
+};
