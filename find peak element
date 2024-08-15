@@ -1,0 +1,34 @@
+link - https://leetcode.com/problems/find-peak-element/description/
+code - 
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int low=0, high=nums.size()-1;
+
+        while(low < high){
+            int mid = (low+high)/2 ;
+            if(nums[mid] > nums[mid+1])high = mid;
+            else low = mid+1;
+        }
+        return low;
+    }
+};
+
+code2 -
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int pi=0, n=nums.size();
+
+        for(int i=1; i<n-1; i++){
+            if(nums[i] > nums[i-1] && nums[i] > nums[i+1]){
+                pi = i;
+                break;
+            }
+        }
+        if(pi == 0){
+            return (nums[0]>nums[n-1]) ? 0 : n-1;
+        }
+        return pi;
+    }
+};
