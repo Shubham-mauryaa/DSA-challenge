@@ -1,0 +1,32 @@
+link - https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/description/
+code - 
+class Solution {
+public:
+    int minMoves2(vector<int>& nums) {
+        int n = nums.size();
+        nth_element(nums.begin(), nums.begin()+(n/2), nums.end());
+        int mid = nums[n/2], steps=0;
+
+        for(auto num:nums){
+            steps += abs(num-mid);
+        }
+
+        return steps;
+    }
+};
+
+code 2- 
+class Solution {
+public:
+    int minMoves2(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        int mid = nums[n/2], steps=0;
+
+        for(auto num:nums){
+            steps += abs(num-mid);
+        }
+
+        return steps;
+    }
+};
