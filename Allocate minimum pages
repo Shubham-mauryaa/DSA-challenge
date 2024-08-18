@@ -1,0 +1,45 @@
+link- https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
+code - 
+class Solution {
+  public:
+    // Function to find minimum number of pages.
+    bool isvalid(int arr[], int n, int m, long long int mid ){
+        int cnt = 0, sum = 0, i=0;
+            
+        for(int i=0; i<n; i++){
+            sum += arr[i];
+            
+            if(sum > mid){
+                sum = arr[i];
+                cnt += 1;
+            }
+            
+            if(cnt >= m)return false;
+        }
+        
+        return true;
+    }
+    
+    long long findPages(int n, int arr[], int m) {
+        if( m > n )return -1;
+        
+        long long int res = -1, low = arr[0], high = 0;
+        
+        for(int i=0; i<n; i++){
+            if(arr[i] > low)low = arr[i];
+            high += arr[i];
+        }
+        
+        while(low <= high){
+            long long int mid = low + (high - low)/2 ;
+            
+            if( isvalid(arr, n, m, mid) ){
+                res = mid;
+                high = mid-1;
+            }
+            else low = mid+1;
+        }
+        
+        return res;
+    }
+};
