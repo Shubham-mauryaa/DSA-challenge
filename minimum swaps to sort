@@ -1,0 +1,31 @@
+link - https://www.geeksforgeeks.org/problems/minimum-swaps/1
+code - 
+class Solution 
+{
+    public:
+    //Function to find the minimum number of swaps required to sort the array. 
+	int minSwaps(vector<int>&nums)
+	{
+	    int n = nums.size();
+	    map<int, int> mp;
+	    
+	    for(int i=0; i<n; i++){
+	        mp[nums[i]] = i;
+	    }
+	    
+	    int i=0, ans=0;
+	    for(auto m : mp){
+	        int val = m.first, indx = m.second;
+	        
+	        if(val != nums[i]){
+	            mp[nums[i]] = indx;
+	            swap(nums[i], nums[indx]);
+	            
+	            ans += 1;
+	        }
+	        i++;
+	    }
+	    
+	    return ans;
+	}
+};
