@@ -1,0 +1,38 @@
+link- https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1
+code - 
+class Solution {
+  public:
+    
+    Node* helper(Node* l1 , Node* l2){
+        if(l1 == NULL)return l2 ;
+        if(l2 == NULL)return l1 ;
+        
+        Node* ans = new Node(-1);
+        Node* node = ans;
+        
+        while(l1 && l2){
+            int d;
+            if(l1->data <= l2->data){
+                d = l1->data;
+                l1 = l1->bottom;
+            }
+            else{
+                d = l2->data;
+                l2 = l2->bottom;
+            }
+            
+            node->bottom = new Node(d);
+            node = node->bottom;
+        }
+        
+        if(l1) node->bottom = l1;
+        else node->bottom = l2;
+        
+        return ans->bottom;
+        
+    }
+    Node *flatten(Node *root) {
+        if(root == NULL || root->next == NULL)return root;
+        return helper(root, flatten(root->next));
+    }
+};
