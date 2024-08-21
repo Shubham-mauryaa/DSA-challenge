@@ -1,0 +1,48 @@
+link- https://www.geeksforgeeks.org/problems/reorder-list/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+code - 
+class Solution {
+  public:
+    Node* reverselist(Node* head){
+        Node* pre = NULL;
+        while(head){
+            Node* t = head;
+            head = head->next;
+            t->next = pre;
+            pre = t;
+        }
+        return pre;
+    }
+    
+    Node* mergelist(Node* l1, Node* l2){
+        if(!l1)return l2;
+        if(!l2)return l1;
+        
+        Node* ans = l1;
+
+        while(l1 && l2){
+            Node* temp = l1;
+            l1 = l1->next;
+            temp->next = l2;
+            temp = temp->next;
+            l2 = l2->next;
+            temp->next = l1;
+        }
+        
+        return ans;
+    }
+    
+    void reorderList(Node* head) {
+        Node* slow = head, *fast = head->next;
+        
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        Node* pre = reverselist(slow->next);
+        slow->next = NULL;
+        
+        head = mergelist(head, pre);
+        
+    }
+};
